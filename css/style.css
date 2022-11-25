@@ -1,0 +1,141 @@
+:root {
+	--clr-grey-primary: #eaeaea;
+	--clr-grey-dark: #b1b1b1;
+}
+
+body {
+	background: rgb(0, 150, 136);
+	background: linear-gradient(
+		180deg,
+		rgba(0, 150, 136, 1) 0%,
+		rgba(0, 150, 136, 1) 25%,
+		rgba(192, 204, 194, 1) 25%,
+		rgba(210, 219, 219, 1) 100%
+	);
+	background-repeat: no-repeat;
+	height: 100vh;
+}
+
+nav {
+	background-color: var(--clr-grey-primary);
+}
+
+.flex-center-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.avatar {
+	height: 50px;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	overflow: hidden;
+
+	margin-right: 10px;
+}
+
+.user {
+	padding: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.user-right,
+.bottom-nav > i {
+	color: var(--clr-grey-dark);
+}
+
+nav > .user {
+	height: 65px;
+}
+
+nav > .user > .user-right {
+	font-size: 20px;
+	margin: 1rem;
+}
+
+.main-container {
+	margin: auto;
+	position: relative;
+	top: 2.5vh;
+	width: 90vw;
+	height: 95vh;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.left-section {
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	width: 400px;
+
+	border-right: 1px solid var(--clr-grey-dark);
+
+	background-color: white;
+}
+
+.search > .btn {
+	background-color: var(--clr-grey-dark);
+}
+
+.search :focus {
+	box-shadow: none;
+}
+
+.chat-list {
+	overflow: auto;
+	/* border-top: 1px solid var(--clr-grey-dark); */
+
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.chat-list > .user {
+	border-bottom: 1px solid var(--clr-grey-primary);
+}
+
+.right-section {
+	background-image: url('../img/mine.jpg');
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.main-chat-section {
+	display: flex;
+	flex-direction: column;
+	row-gap: 0.5rem;
+	flex-grow: 1;
+	overflow: auto;
+}
+
+.main-chat-section > .message {
+	padding: 0.5rem;
+	width: fit-content;
+	align-items: center;
+	border-radius: 10px;
+}
+
+.main-chat-section > .message > .hour {
+	color: var(--clr-grey-dark);
+	text-align: end;
+	font-size: 0.7rem;
+}
+
+.received {
+	background-color: white;
+}
+
+.sent {
+	align-self: flex-end;
+	background-color: #d5f9ba;
+}
+
+.chat-list > .user:hover,
+.chat-list > .active {
+	background-color: #f5f5f5;
+}
