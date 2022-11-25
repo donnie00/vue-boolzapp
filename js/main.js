@@ -6,8 +6,13 @@ createApp({
 	data() {
 		return {
 			contacts,
+			activeContactIndex: 0,
 		};
 	},
 	//inserisci qui le tue funzioni
-	methods: {},
+	methods: {
+		changeActiveChat(index) {
+			this.activeContactIndex = index;
+		},
+	},
 }).mount('#app');

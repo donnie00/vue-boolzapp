@@ -11,6 +11,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
       integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <script src="https://cdn.jsdelivr.net/npm/luxon@3.1.0/build/global/luxon.min.js"></script>
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
@@ -48,9 +49,9 @@
             </nav>
 
             <div class="chat-list">
-               <div class="user" v-for="(user, i) in contacts">
+               <div class="user" v-for="(user, i) in contacts" @click="changeActiveChat(i)">
                   <div class="user-left flex-center-center">
-                     <img class="avatar" :src="`img/avatar${user.avatar}.jpg`" alt="">
+                     <img class=" avatar" :src="`img/avatar${user.avatar}.jpg`" alt="">
                      <div class="text">
                         <div class="fw-bold">
                            {{user.name}}
@@ -70,9 +71,9 @@
             <nav class="top-nav">
                <div class="user">
                   <div class="user-left flex-center-center">
-                     <img class="avatar" src="img/avatar_io.jpg" alt="">
+                     <img class="avatar" :src="`img/avatar${contacts[activeContactIndex].avatar}.jpg`" alt="">
                      <div class="text">
-                        <div class="fw-bold">Sofia</div>
+                        <div class="fw-bold">{{contacts[activeContactIndex].name}}</div>
                         <small class="text-muted">Ultimo accesso oggi alle 12:00</small>
                      </div>
                   </div>
@@ -84,13 +85,10 @@
                </div>
             </nav>
             <div class="main-chat-section p-5">
-               <div class="message received">
-                  <div class="text">Tutto bene grazie</div>
-                  <div class="hour">12:00</div>
-               </div>
-               <div class="message sent">
-                  <div class="text">Tutto bene grazie</div>
-                  <div class="hour">12:00</div>
+               <div class="message" :class="chat.status"
+                  v-for="(chat, i) in contacts[activeContactIndex].messages">
+                  <div class="text">{{chat.message}}</div>
+                  <div class="hour">{{chat.date}}</div>
                </div>
             </div>
             <nav class="bottom-nav d-flex p-1">
