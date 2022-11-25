@@ -93,7 +93,9 @@
             </div>
             <nav class="bottom-nav d-flex p-1">
                <i class="fs-4 p-2 px-4 fa-regular fa-face-smile"></i>
-               <input class="form-control" type="text" placeholder="Scrivi un messaggio">
+               <input v-model="messageSent" @Keyup.enter="sendNewMessage()"
+                  class="form-control" type="text"
+                  placeholder="Scrivi un messaggio">
                <i class="fs-4 p-2 px-4 fa-solid fa-microphone"></i>
             </nav>
          </div>
