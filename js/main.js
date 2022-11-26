@@ -7,12 +7,7 @@ createApp({
 		return {
 			contacts,
 			activeContactIndex: 0,
-			messageSent: '',
-			newMessage: {
-				date: '',
-				message: '',
-				status: 'sent',
-			},
+			msgToSend: '',
 		};
 	},
 	//inserisci qui le tue funzioni
@@ -20,18 +15,29 @@ createApp({
 		changeActiveChat(index) {
 			this.activeContactIndex = index;
 		},
-		sendNewMessage() {
-			const sendingTime = luxon.DateTime.now();
-			const sendingHour = sendingTime.hour;
-			const sendingMinute = sendingTime.minute;
 
-			this.newMessage.message = this.messageSent;
-			this.newMessage.date = `${sendingHour}:${sendingMinute}`;
-			this.contacts[this.activeContactIndex].messages.push(this.newMessage);
-
-			this.messageSent = '';
+		createNewMessage(msg, status) {
+			const newMessage = {};
+			newMessage.message = msg;
+			newMessage.date = luxon.DateTime.local();
+			newMessage.status = status;
+			return newMessage;
 		},
 
-		sendOkAnswer() {},
+		sendOk() {
+			const okMsg = this.createNewMessage('ok', 'received');
+			const index = this.activeContactIndex;
+			setTimeout(function () {
+				contacts[index].messages.push(okMsg);
+			}, 1000);
+		},
+
+		sendMsg() {
+			const msg = this.createNewMessage(this.msgToSend, 'sent');
+			this.contacts[this.activeContactIndex].messages.push(msg);
+			this.sendOk();
+
+			this.msgToSend = '';
+		},
 	},
 }).mount('#app');
