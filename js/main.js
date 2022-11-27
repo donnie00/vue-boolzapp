@@ -8,6 +8,7 @@ createApp({
 			contacts,
 			activeContactIndex: 0,
 			msgToSend: '',
+			filter: '',
 		};
 	},
 	//inserisci qui le tue funzioni
@@ -38,6 +39,18 @@ createApp({
 			this.sendOk();
 
 			this.msgToSend = '';
+		},
+
+		filterChats() {
+			const filter = this.filter;
+			this.contacts.forEach((contact) => {
+				const name = contact.name.toLowerCase();
+				contact.visible = true;
+
+				if (!name.includes(filter)) {
+					contact.visible = false;
+				}
+			});
 		},
 	},
 }).mount('#app');

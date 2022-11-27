@@ -23,7 +23,7 @@
                <div class="user">
                   <div class="user-left flex-center-center">
                      <img class="avatar" src="img/avatar_io.jpg" alt="">
-                     <span class="fw-bold">Sofia</span>
+                     <span class="fw-bold">Gloria</span>
                   </div>
                   <div class="user-right d-flex gap-4">
                      <i class="fa-solid fa-circle-notch"></i>
@@ -41,17 +41,19 @@
                   </div>
                </div>
                <div class="p-1 input-group search">
-                  <button class="btn">
+                  <button @click="filterChats()" class="btn">
                      <i class="fa-solid fa-magnifying-glass"></i>
                   </button>
-                  <input type="text" class="form-control" placeholder="Cerca qui">
+                  <input @change="filterChats()" v-model="filter" type="text" class="form-control"
+                     placeholder="Cerca qui">
                </div>
             </nav>
 
             <div class="chat-list">
-               <div class="user" v-for="(user, i) in contacts" @click="changeActiveChat(i)">
+               <div :class="user.visible ? 'user' : 'd-none'" v-for="(user, i) in contacts"
+                  @click="changeActiveChat(i)">
                   <div class="user-left flex-center-center">
-                     <img class=" avatar" :src="`img/avatar${user.avatar}.jpg`" alt="">
+                     <img class="avatar" :src="`img/avatar${user.avatar}.jpg`" alt="">
                      <div class="text">
                         <div class="fw-bold">
                            {{user.name}}
@@ -85,10 +87,21 @@
                </div>
             </nav>
             <div class="main-chat-section p-5">
-               <div class="message" :class="chat.status"
+               <div class="message d-flex" :class="chat.status"
                   v-for="(chat, i) in contacts[activeContactIndex].messages">
-                  <div class="text">{{chat.message}}</div>
-                  <div class="hour">{{chat.date}}</div>
+                  <div>
+                     <div class="text">{{chat.message}}</div>
+                     <div class="hour">{{chat.date}}</div>
+                  </div>
+                  <div class="message-dropdown ps-2">
+                     <span>
+                        <i class=" fa-solid fa-chevron-down"></i>
+                     </span>
+                     <ul class="dropdown-el list-unstyled d-none">
+                        <li class="list-item">Message info</li>
+                        <li class="list-item">Delete message</li>
+                     </ul>
+                  </div>
                </div>
             </div>
             <nav class="bottom-nav d-flex p-1">

@@ -118,9 +118,11 @@ nav > .user > .user-right {
 	width: fit-content;
 	align-items: center;
 	border-radius: 10px;
+
+	position: relative;
 }
 
-.main-chat-section > .message > .hour {
+.main-chat-section > .message .hour {
 	color: var(--clr-grey-dark);
 	text-align: end;
 	font-size: 0.7rem;
@@ -138,4 +140,20 @@ nav > .user > .user-right {
 .chat-list > .user:hover,
 .chat-list > .active {
 	background-color: #f5f5f5;
+}
+
+.message-dropdown {
+	align-self: flex-start;
+}
+
+.dropdown-el {
+	padding: 10px;
+	position: absolute;
+	right: 0;
+	z-index: 1;
+	background-color: white;
+	border-radius: 1rem;
+	box-shadow: 5px 5px 15px black;
+
+	font-size: 0.9rem;
 }
