@@ -15,7 +15,6 @@ createApp({
 	//inserisci qui le tue funzioni
 	methods: {
 		formatDate() {
-			// DateTime.fromISO('2014-08-06T13:07:04.054').toFormat('yyyy LLL dd');
 			contacts.forEach((contact) => {
 				const messages = contact.messages;
 				messages.forEach((message) => {
@@ -36,7 +35,7 @@ createApp({
 			const newMessage = {};
 			const currentTime = this.dateTime.now();
 			newMessage.message = msg;
-			newMessage.date = currentTime.toFormat('HH:mm');
+			newMessage.date = currentTime;
 			newMessage.status = status;
 			return newMessage;
 		},
@@ -72,7 +71,6 @@ createApp({
 		deleteMsg(index) {
 			const activeContactMessages =
 				this.contacts[this.activeContactIndex].messages;
-			console.log(activeContactMessages);
 
 			activeContactMessages.splice(index, 1);
 		},

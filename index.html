@@ -80,7 +80,13 @@
                      <img class="avatar" :src="`img/avatar${contacts[activeContactIndex].avatar}.jpg`" alt="">
                      <div class="text">
                         <div class="fw-bold">{{contacts[activeContactIndex].name}}</div>
-                        <small class="text-muted">Ultimo accesso oggi alle 12:00</small>
+                        <small class="text-muted">Ultimo accesso il
+
+                           {{contacts[activeContactIndex]
+                           .messages[contacts[activeContactIndex].messages.length - 1]
+                           .date.toFormat('DD')}}
+
+                        </small>
                      </div>
                   </div>
                   <div class="user-right d-flex gap-4">
@@ -91,11 +97,13 @@
                </div>
             </nav>
             <div class="main-chat-section p-5">
-               <div class="message d-flex" :class="chat.status"
+               <div
+                  class=" message d-flex"
+                  :class="chat.status"
                   v-for="(chat, i) in contacts[activeContactIndex].messages">
                   <div>
-                     <div class="text">{{chat.message}}</div>
-                     <div class="hour">{{chat.date.toFormat('T')}}</div>
+                     <div class="text">{{ chat.message }}</div>
+                     <div class="hour">{{ chat.date.toFormat('T') }}</div>
                   </div>
                   <div class="dropdown align-self-baseline ps-2">
                      <a class="link-secondary" href="#" role="button" data-bs-toggle="dropdown"
@@ -110,6 +118,7 @@
                   </div>
                </div>
             </div>
+
             <nav class="bottom-nav d-flex p-1">
                <i class="fs-4 p-2 px-4 fa-regular fa-face-smile"></i>
                <input v-model="msgToSend" @Keyup.enter="sendMsg()"
