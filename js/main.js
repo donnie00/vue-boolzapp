@@ -1,4 +1,4 @@
-import contacts from '/js/usersList.js';
+import contacts from './usersList.js';
 const {createApp} = Vue;
 
 createApp({
@@ -9,27 +9,43 @@ createApp({
 			activeContactIndex: 0,
 			msgToSend: '',
 			filter: '',
+			dateTime: luxon.DateTime,
 		};
 	},
 	//inserisci qui le tue funzioni
 	methods: {
+		formatDate() {
+			// DateTime.fromISO('2014-08-06T13:07:04.054').toFormat('yyyy LLL dd');
+			contacts.forEach((contact) => {
+				const messages = contact.messages;
+				messages.forEach((message) => {
+					const formattedDate = this.dateTime.fromFormat(
+						message.date,
+						`dd/MM/yyyy TT`
+					);
+					message.date = formattedDate;
+				});
+			});
+		},
+
 		changeActiveChat(index) {
 			this.activeContactIndex = index;
 		},
 
 		createNewMessage(msg, status) {
 			const newMessage = {};
+			const currentTime = this.dateTime.now();
 			newMessage.message = msg;
-			newMessage.date = luxon.DateTime.local();
+			newMessage.date = currentTime.toFormat('HH:mm');
 			newMessage.status = status;
 			return newMessage;
 		},
 
 		sendOk() {
-			const okMsg = this.createNewMessage('ok', 'received');
+			const okMsg = this.createNewMessage('Ok', 'received');
 			const index = this.activeContactIndex;
-			setTimeout(function () {
-				contacts[index].messages.push(okMsg);
+			setTimeout(() => {
+				this.contacts[index].messages.push(okMsg);
 			}, 1000);
 		},
 
@@ -52,5 +68,17 @@ createApp({
 				}
 			});
 		},
+
+		deleteMsg(index) {
+			const activeContactMessages =
+				this.contacts[this.activeContactIndex].messages;
+			console.log(activeContactMessages);
+
+			activeContactMessages.splice(index, 1);
+		},
+	},
+
+	beforeMount() {
+		this.formatDate();
 	},
 }).mount('#app');

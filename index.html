@@ -47,7 +47,7 @@
                   <button @click="filterChats()" class="btn">
                      <i class="fa-solid fa-magnifying-glass"></i>
                   </button>
-                  <input @change="filterChats()" v-model="filter" type="text" class="form-control"
+                  <input @input="filterChats()" v-model="filter" type="text" class="form-control"
                      placeholder="Cerca qui">
                </div>
             </nav>
@@ -63,12 +63,12 @@
                            {{user.name}}
                         </div>
                         <small class="text-muted">
-                           Ultimo Messaggio
+                           {{ user.messages[user.messages.length - 1].message }}
                         </small>
                      </div>
                   </div>
                   <div class="user-right align-self-start">
-                     <small class="text-muted">12:00</small>
+                     <small class="text-muted">{{user.messages[user.messages.length - 1].date.toFormat('T')}}</small>
                   </div>
                </div>
             </div>
@@ -95,7 +95,7 @@
                   v-for="(chat, i) in contacts[activeContactIndex].messages">
                   <div>
                      <div class="text">{{chat.message}}</div>
-                     <div class="hour">{{chat.date}}</div>
+                     <div class="hour">{{chat.date.toFormat('T')}}</div>
                   </div>
                   <div class="dropdown align-self-baseline ps-2">
                      <a class="link-secondary" href="#" role="button" data-bs-toggle="dropdown"
@@ -105,7 +105,7 @@
 
                      <ul class="dropdown-menu">
                         <li class="dropdown-item">Info messaggio</li>
-                        <li class="dropdown-item">Cancella messaggio</li>
+                        <li @click="deleteMsg(i)" class="dropdown-item">Cancella messaggio</li>
                      </ul>
                   </div>
                </div>
