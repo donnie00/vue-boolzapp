@@ -11,6 +11,9 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
       integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"></script>
    <script src="https://cdn.jsdelivr.net/npm/luxon@3.1.0/build/global/luxon.min.js"></script>
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
@@ -50,7 +53,8 @@
             </nav>
 
             <div class="chat-list">
-               <div :class="user.visible ? 'user' : 'd-none'" v-for="(user, i) in contacts"
+               <div class="user" :class="{'active' : i === activeContactIndex , 'd-none' : !user.visible}"
+                  v-for="(user, i) in contacts"
                   @click="changeActiveChat(i)">
                   <div class="user-left flex-center-center">
                      <img class="avatar" :src="`img/avatar${user.avatar}.jpg`" alt="">
@@ -93,13 +97,15 @@
                      <div class="text">{{chat.message}}</div>
                      <div class="hour">{{chat.date}}</div>
                   </div>
-                  <div class="message-dropdown ps-2">
-                     <span>
-                        <i class=" fa-solid fa-chevron-down"></i>
-                     </span>
-                     <ul class="dropdown-el list-unstyled d-none">
-                        <li class="list-item">Message info</li>
-                        <li class="list-item">Delete message</li>
+                  <div class="dropdown align-self-baseline ps-2">
+                     <a class="link-secondary" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-solid fa-chevron-down"></i>
+                     </a>
+
+                     <ul class="dropdown-menu">
+                        <li class="dropdown-item">Info messaggio</li>
+                        <li class="dropdown-item">Cancella messaggio</li>
                      </ul>
                   </div>
                </div>

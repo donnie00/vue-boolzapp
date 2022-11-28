@@ -138,7 +138,7 @@ nav > .user > .user-right {
 }
 
 .chat-list > .user:hover,
-.chat-list > .active {
+.chat-list > .user.active {
 	background-color: #f5f5f5;
 }
 
