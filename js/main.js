@@ -57,7 +57,7 @@ createApp({
 		},
 
 		filterChats() {
-			const filter = this.filter;
+			const filter = this.filter.toLowerCase();
 			this.contacts.forEach((contact) => {
 				const name = contact.name.toLowerCase();
 				contact.visible = true;

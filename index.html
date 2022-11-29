@@ -62,13 +62,18 @@
                         <div class="fw-bold">
                            {{user.name}}
                         </div>
-                        <small class="text-muted">
+                        <small v-if="user.messages.length !== 0" class="text-muted">
                            {{ user.messages[user.messages.length - 1].message }}
+                        </small>
+                        <small v-else class="text-muted">
+                           Nessun messaggio recente
                         </small>
                      </div>
                   </div>
-                  <div class="user-right align-self-start">
-                     <small class="text-muted">{{user.messages[user.messages.length - 1].date.toFormat('T')}}</small>
+                  <div v-if="user.messages.length !== 0" class="user-right align-self-start">
+                     <small
+                        class="text-muted">{{user.messages[user.messages.length - 1].date.toFormat('T')}}
+                     </small>
                   </div>
                </div>
             </div>
@@ -80,12 +85,16 @@
                      <img class="avatar" :src="`img/avatar${contacts[activeContactIndex].avatar}.jpg`" alt="">
                      <div class="text">
                         <div class="fw-bold">{{contacts[activeContactIndex].name}}</div>
-                        <small class="text-muted">Ultimo accesso il
+                        <small v-if="contacts[activeContactIndex]
+                        .messages.length !== 0" class="text-muted">Ultimo accesso il
 
                            {{contacts[activeContactIndex]
                            .messages[contacts[activeContactIndex].messages.length - 1]
                            .date.toFormat('DD')}}
 
+                        </small>
+                        <small v-else class="text-muted">
+                           Nessun dato
                         </small>
                      </div>
                   </div>
@@ -97,8 +106,8 @@
                </div>
             </nav>
             <div class="main-chat-section p-5">
-               <div
-                  class=" message d-flex"
+               <div v-if="contacts[activeContactIndex].messages.length !== 0"
+                  class="message d-flex"
                   :class="chat.status"
                   v-for="(chat, i) in contacts[activeContactIndex].messages">
                   <div>
@@ -116,6 +125,8 @@
                         <li @click="deleteMsg(i)" class="dropdown-item">Cancella messaggio</li>
                      </ul>
                   </div>
+               </div>
+               <div class="bg-opacity-75 bg-light p-1 rounded-4 text-center" v-else>Nessun messaggio da visualizzare
                </div>
             </div>
 
